@@ -3,10 +3,7 @@ package cat.tecnocampus.tinder.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -37,12 +34,12 @@ public class Profile {
 	private Gender attraction;
 	private Passion passion;
 
-	@OneToMany(mappedBy = "origin")
-	@JsonManagedReference
+	@OneToMany(mappedBy = "origin",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
 	private List<Like> likes = new ArrayList<>();
 
 	public Profile() {
-
 	}
 
 	public String getEmail() {

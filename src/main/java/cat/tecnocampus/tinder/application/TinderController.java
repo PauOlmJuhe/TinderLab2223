@@ -51,11 +51,7 @@ public class TinderController {
 				.map(origin::createAndMatchLike)		//create likes
 				.collect(Collectors.toList());
 		origin.addLikes(likes);
-		System.out.println("hola" + origin.getLikes());
-		profileRepository.save(origin);
-		likeRepository.saveAll(likes);
 		List<Like> updatedTargetMatchingLikes = updateTargetMatchingLikes(origin, likes);
-		likeRepository.saveAll(updatedTargetMatchingLikes);
 		return likes.size();
 	}
 

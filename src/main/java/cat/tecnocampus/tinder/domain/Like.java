@@ -15,7 +15,7 @@ public class Like {
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile origin;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    //@JsonBackReference
     private Profile target;
     private boolean matched;
     private LocalDate creationDate;
