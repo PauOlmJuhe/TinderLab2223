@@ -15,7 +15,7 @@ import javax.validation.constraints.Max;
 public class TeachingPourposesRestController {
     TinderController tinderController;
 
-    public TeachingPourposesRestController(TinderController tinderController) {
+    public TeachingPourposesRestController(NotesService tinderController) {
         this.tinderController = tinderController;
     }
 
