@@ -13,3 +13,18 @@ INSERT INTO tinder_like(origin_email, target_email, creation_date, matched) VALU
 INSERT INTO tinder_like(origin_email, target_email, creation_date, matched) VALUES('marta@tecnocampus.cat', 'pepe@tecnocampus.cat', current_date(), false);
 //INSERT INTO tinder_like(origin_email, target_email, creation_date) select id, (select id from tinder_user where email = 'pepe@tecnocampus.cat'), current_date() from tinder_user where email = 'marta@tecnocampus.cat';
 
+INSERT INTO role(name) VALUES ('ROLE_USER');
+INSERT INTO role(name) VALUES ('ROLE_MODERATOR');
+INSERT INTO role(name) VALUES ('ROLE_ADMIN');
+
+INSERT INTO user_lab (email, username, password) VALUES ('josep@tecnocampus.cat', 'josep', '{bcrypt}$2a$10$fVKfcc47q6lrNbeXangjYeY000dmjdjkdBxEOilqhapuTO5ZH0co2');
+INSERT INTO user_lab (email, username, password) VALUES ('jordi@tecnocampus.cat', 'jordi', '{bcrypt}$2a$10$fVKfcc47q6lrNbeXangjYeY000dmjdjkdBxEOilqhapuTO5ZH0co2');
+INSERT INTO user_lab (email, username, password) VALUES ('maria@tecnocampus.cat', 'maria', '{bcrypt}$2a$10$fVKfcc47q6lrNbeXangjYeY000dmjdjkdBxEOilqhapuTO5ZH0co2');
+
+
+INSERT INTO user_roles (USER_ID, ROLE_ID) VALUES (1, 1);
+INSERT INTO user_roles (USER_ID, ROLE_ID) VALUES (2, 3);
+INSERT INTO user_roles (USER_ID, ROLE_ID) VALUES (3, 1);
+INSERT INTO user_roles (USER_ID, ROLE_ID) VALUES (3, 3);
+
+
