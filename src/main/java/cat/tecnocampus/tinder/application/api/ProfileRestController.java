@@ -6,6 +6,7 @@ import cat.tecnocampus.tinder.domain.Profile;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -27,6 +28,12 @@ public class ProfileRestController {
 	public List<Profile> getProfiles() {
 		return tinderController.getProfiles();
 	}
+
+	@GetMapping("/profiles/me")
+	public Profile getProfileMe(Principal principal) {
+		return tinderController.getProfile(principal.getName());
+	}
+
 
 	@GetMapping("/likes")
 	public List<Like> getLikes() {
