@@ -26,6 +26,10 @@ public class TinderController {
 		return profileRepository.findById(email).orElseThrow(() -> new ProfileNotFound(email));
 	}
 
+	public Profile getProfileWithNickname(String username) {
+		return profileRepository.findByNickname(username).orElseThrow(() -> new ProfileNotFound(username));
+	}
+
 	public List<Profile> getProfiles() {
 		return profileRepository.findAll();
 	}

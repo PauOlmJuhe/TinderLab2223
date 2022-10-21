@@ -31,7 +31,7 @@ public class ProfileRestController {
 
 	@GetMapping("/profiles/me")
 	public Profile getProfileMe(Principal principal) {
-		return tinderController.getProfile(principal.getName());
+		return tinderController.getProfileWithNickname(principal.getName());
 	}
 
 

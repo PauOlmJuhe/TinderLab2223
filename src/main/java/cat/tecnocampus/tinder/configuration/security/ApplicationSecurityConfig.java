@@ -1,5 +1,8 @@
 package cat.tecnocampus.tinder.configuration.security;
 
+import cat.tecnocampus.tinder.configuration.security.jwt.JwtAuthenticationFilter;
+import cat.tecnocampus.tinder.configuration.security.jwt.JwtConfig;
+import cat.tecnocampus.tinder.configuration.security.jwt.JwtTokenVerifierFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -13,15 +16,18 @@ public class ApplicationSecurityConfig {
 
     private final PasswordEncoder passwordEncoder;
     private final TinderUserDetailsService tinderUserDetailsService;
+    private final JwtConfig jwtConfig;
 
-    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, TinderUserDetailsService tinderUserDetailsService) {
+    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, TinderUserDetailsService tinderUserDetailsService,
+                                     JwtConfig jwtConfig) {
         this.passwordEncoder = passwordEncoder;
         this.tinderUserDetailsService = tinderUserDetailsService;
+        this.jwtConfig = jwtConfig;
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
                 .authorizeRequests()
                 .antMatchers( "/", "index", "/css/*", "/js/*", "/*.html", "/h2-console/**").permitAll()
                 .antMatchers("/profiles/me/**").hasRole("USER")
@@ -30,15 +36,15 @@ public class ApplicationSecurityConfig {
                 .authenticated()
 
                 .and()
-                .httpBasic()
+                .addFilter(new JwtAuthenticationFilter(authenticationProvider(), jwtConfig))
+                .addFilterAfter(new JwtTokenVerifierFilter(jwtConfig), JwtAuthenticationFilter.class)
 
-                .and()
                 .csrf().disable()
                 .cors().and()
                 .headers().frameOptions().disable().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        return http.build();
+        return httpSecurity.build();
     }
 
     @Bean
