@@ -1,4 +1,4 @@
-package cat.tecnocampus.tinder.application.api;
+package cat.tecnocampus.tinder.api;
 
 import cat.tecnocampus.tinder.application.TinderController;
 import cat.tecnocampus.tinder.domain.Like;

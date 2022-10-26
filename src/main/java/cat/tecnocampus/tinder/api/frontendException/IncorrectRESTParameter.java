@@ -1,4 +1,4 @@
-package cat.tecnocampus.tinder.application.api.frontendException;
+package cat.tecnocampus.tinder.api.frontendException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

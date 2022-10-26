@@ -30,6 +30,7 @@ public class ApplicationSecurityConfig {
         httpSecurity
                 .authorizeRequests()
                 .antMatchers( "/", "index", "/css/*", "/js/*", "/*.html", "/h2-console/**").permitAll()
+                .antMatchers("/quotes/**").permitAll()
                 .antMatchers("/profiles/me/**").hasRole("USER")
                 .antMatchers("/profiles/**", "/profilesByName/**").hasRole("ADMIN")
                 .anyRequest()

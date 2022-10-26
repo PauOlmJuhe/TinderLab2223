@@ -1,7 +1,7 @@
-package cat.tecnocampus.tinder.application.api;
+package cat.tecnocampus.tinder.api;
 
 import cat.tecnocampus.tinder.application.TinderController;
-import cat.tecnocampus.tinder.application.api.frontendException.IncorrectRESTParameter;
+import cat.tecnocampus.tinder.api.frontendException.IncorrectRESTParameter;
 import cat.tecnocampus.tinder.domain.Profile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.validation.annotation.Validated;
