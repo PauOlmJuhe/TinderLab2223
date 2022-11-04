@@ -41,6 +41,13 @@ public class TinderController {
 				.collect(Collectors.toList());
 	}
 
+	public List<Profile> getCandidatesByNickname(String username) {
+		Profile user = this.getProfileWithNickname(username);
+		return this.getProfiles().stream()
+				.filter(user::isCompatible)
+				.collect(Collectors.toList());
+	}
+
 	public Profile addProfile(Profile profile) {
 		return profileRepository.save(profile);
 	}

@@ -1,9 +1,12 @@
 package cat.tecnocampus.tinder.api;
 
+import cat.tecnocampus.tinder.application.TeachingPurposesController;
 import cat.tecnocampus.tinder.application.TinderController;
 import cat.tecnocampus.tinder.api.frontendException.IncorrectRESTParameter;
 import cat.tecnocampus.tinder.domain.Profile;
+import cat.tecnocampus.tinder.persistence.ProfileRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +16,19 @@ import javax.validation.constraints.Max;
 @RequestMapping("/teaching")
 @Validated
 public class TeachingPourposesRestController {
-    TinderController tinderController;
+    private final TinderController tinderController;
 
-    public TeachingPourposesRestController(TinderController tinderController) {
+    @Autowired
+    ProfileRepository profileRepository;
+    private TeachingPurposesController teachingPurposesControllerCreatedHere;
+
+    private final TeachingPurposesController teachingPurposesControllerInjected;
+
+    public TeachingPourposesRestController(TinderController tinderController, TeachingPurposesController teachingPurposesControllerInjected,
+                                           ProfileRepository profileRepository) {
         this.tinderController = tinderController;
+        this.teachingPurposesControllerInjected = teachingPurposesControllerInjected;
+        this.teachingPurposesControllerCreatedHere = new TeachingPurposesController(profileRepository);
     }
 
     @GetMapping("/int/{i}")
@@ -41,4 +53,15 @@ public class TeachingPourposesRestController {
             throw new IncorrectRESTParameter("name", name);
         return "You must be the great " + name;
     }
+
+    @GetMapping("/createTwoProfilesOneCreated")
+    public void createTwoProfilesOneCreated() {
+        teachingPurposesControllerCreatedHere.createTwoProfilesWithError();
+    }
+
+    @GetMapping("/createTwoProfilesNoneCreated")
+    public void createTwoProfilesNoneCreated() {
+        teachingPurposesControllerInjected.createTwoProfilesWithError();
+    }
+
 }

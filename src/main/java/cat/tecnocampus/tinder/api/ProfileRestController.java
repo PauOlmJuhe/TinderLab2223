@@ -40,6 +40,12 @@ public class ProfileRestController {
 		return tinderController.getLikes();
 	}
 
+	//Returns profiles that match the registered username preferences
+	@GetMapping("/profiles/me/candidates")
+	public List<Profile> getCandidatesByNickname(Principal principal) {
+		return tinderController.getCandidatesByNickname(principal.getName());
+	}
+
 	//Returns profiles that match the user (email) preferences
 	@GetMapping("/profiles/{email}/candidates")
 	public List<Profile> getCandidates(@PathVariable String email) {
