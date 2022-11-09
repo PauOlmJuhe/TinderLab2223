@@ -1,4 +1,4 @@
-package cat.tecnocampus.tinder.application.api;
+package cat.tecnocampus.tinder.api;
 
 import cat.tecnocampus.tinder.application.TinderController;
 import cat.tecnocampus.tinder.domain.Like;
@@ -6,6 +6,7 @@ import cat.tecnocampus.tinder.domain.Profile;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -28,9 +29,21 @@ public class ProfileRestController {
 		return tinderController.getProfiles();
 	}
 
+	@GetMapping("/profiles/me")
+	public Profile getProfileMe(Principal principal) {
+		return tinderController.getProfileWithNickname(principal.getName());
+	}
+
+
 	@GetMapping("/likes")
 	public List<Like> getLikes() {
 		return tinderController.getLikes();
+	}
+
+	//Returns profiles that match the registered username preferences
+	@GetMapping("/profiles/me/candidates")
+	public List<Profile> getCandidatesByNickname(Principal principal) {
+		return tinderController.getCandidatesByNickname(principal.getName());
 	}
 
 	//Returns profiles that match the user (email) preferences

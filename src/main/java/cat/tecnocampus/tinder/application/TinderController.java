@@ -26,12 +26,23 @@ public class TinderController {
 		return profileRepository.findById(email).orElseThrow(() -> new ProfileNotFound(email));
 	}
 
+	public Profile getProfileWithNickname(String username) {
+		return profileRepository.findByNickname(username).orElseThrow(() -> new ProfileNotFound(username));
+	}
+
 	public List<Profile> getProfiles() {
 		return profileRepository.findAll();
 	}
 
 	public List<Profile> getCandidates(String email) {
 		Profile user = this.getProfile(email);
+		return this.getProfiles().stream()
+				.filter(user::isCompatible)
+				.collect(Collectors.toList());
+	}
+
+	public List<Profile> getCandidatesByNickname(String username) {
+		Profile user = this.getProfileWithNickname(username);
 		return this.getProfiles().stream()
 				.filter(user::isCompatible)
 				.collect(Collectors.toList());

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/profile.js"></script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>The Tinder</title>
+</head>
+
+<body>
+
+<h2>User and password</h2>
+<label for="fname">User: </label><input type="text" id="fname"><br>
+<label for="fpass">Password: </label><input type="password" id="fpass"><br>
+<input type="button" id="go" onclick='getProfileByName()' value="Get Profile">
+
+  <h1> Profile</h1>
+
+  <div>Name: <span id="name"></span></div>
+  <div>E-mail: <span id="email"></span></div>
+  <div>Gender: <span id="gender"></span></div>
+  <div>Attraction: <span id="attraction"></span></div>
+
+</body>
+
+</html>
